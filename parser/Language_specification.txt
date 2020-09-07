@@ -1,0 +1,130 @@
+1 Language Definition:
+  1.1 Alphabet:
+  1.2.a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
+      b. Decimal digits (0-9);
+Lexic:
+      	a.Special symbols, representing:
+	 - operators + - * / = < <= == >= > <>
+	 - separators ; space ( ) [ ] { }
+	 - reserved words:
+	    	char integer DO ELSE IF THEN MAIN READ 
+		WHILE PRINT
+
+	b.identifiers
+	  -a sequence of letters and  digits, such that the first charater is a letter; the rule is:
+		ident_and_array = identifier | array_member
+		array_member = identifier"["(unsigned_int|"0")"]"
+		identifier = letter | letter{character}
+		unsigned_int = non_zero_digit{digit}
+		digit = "0" | non_zero_digit
+		non_zero_digit = "1" | "2" | ... | "9"
+		letter = "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+		character = digit | letter
+
+	c.constants
+	   1.integer - rule:
+	      integer = ["+"|"-"]unsigned_int|"0"
+	      
+	   2.char - rule:
+	      char:="'"character"'"
+2 Syntax
+		
+	digit = "0" | non_zero_digit
+	non_zero_digit = "1" | "2" | ... | "9"
+	letter = "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+	character = digit | letter
+
+	char = "'"character"'"
+	unsigned_int = non_zero_digit{digit}
+	integer = ["+"|"-"]unsigned_int|"0"
+	array = "["[list_const]"]"
+	list_const=const{","list_const}
+
+	relation = "<" | "<=" | "==" | "<>" | ">=" | ">"
+	identifier = letter | letter{(letter|digit)}
+	array_member = identifier"["(unsigned_int|"0")"]"
+	ident_and_array = identifier | array_member
+	constant = integer | char
+
+	program = "main""{" compoundstmt "}"
+	compoundstmt = stmtlist {compoundstmt} | declarations {compoundstmt}
+	declarations = declaration | declaration{declaration}
+	declaration = type ident_and_array ";"
+	type = "char" | "integer"
+	stmtlist = stmt | stmt {stmt}
+	stmt = simplstmt ";" | structstmt ";"
+	simplstmt = assignstmt | iostmt
+	assignstmt = ident_and_array "=" expression
+	expression = expression("+"|"-")term|term
+	term = term("*"|"/")factor|factor
+	factor = "("expression")"|ident_and_array|constant
+	iostmt = ("READ"|"PRINT") "(" identifier ")"
+	structstmt = ifstmt | whilestmt
+	ifstmt = "IF" condition "THEN" stmt ["ELSE" stmt]
+	whilestmt = "WHILE" condition "DO" stmt
+	condition = expression relation expression
+
+Codification Table:
+ -------------------
+| Token type | code |
+|------------|------|
+| identifier |  0   |
+|------------|------|
+| constant   |  1   |
+|------------|------|
+| MAIN       |  2   |
+|------------|------|
+| {          |  3   |
+|------------|------|
+| }          |  4   |
+|------------|------|
+| char       |  5   |
+|------------|------|
+| integer    |  6   |
+|------------|------|
+| =          |  7   |
+|------------|------|
+| +          |  8   |
+|------------|------|
+| -          |  9   |
+|------------|------|
+| *          |  10  |
+|------------|------|
+| /          |  11  |
+|------------|------|
+| (          |  12  |
+|------------|------|
+| )          |  13  |
+|------------|------|
+| READ       |  14  |
+|------------|------|
+| PRINT      |  15  |
+|------------|------|
+| IF         |  16  |
+|------------|------|
+| THEN       |  17  |
+|------------|------|
+| ELSE       |  18  |
+|------------|------|
+| WHILE      |  19  |
+|------------|------|
+| DO         |  20  |
+|------------|------|
+| >          |  21  |
+|------------|------|
+| <          |  22  |
+|------------|------|
+| <=         |  23  |
+|------------|------|
+| >=         |  24  |
+|------------|------|
+| ==         |  25  |
+|------------|------|
+| <>         |  26  |
+ -------------------
+
+
+
+
+
+
