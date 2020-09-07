@@ -1,0 +1,23 @@
+N=program,compoundstmt,stmtlist,declarations,declaration,type,stmt,simplstmt,structstmt,assignstmt,iostmt,expression,term,factor,ifstmt,whilestmt,condition,relation
+sigma=main,{,},char,integer,identifier,constant,;,=,+,-,*,/,(,),READ,PRINT,IF,THEN,ELSE,WHILE,DO,<,>,<=,<>,>=,==
+P:
+program>main { compoundstmt }
+compoundstmt>stmtlist|declarations|compoundstmt stmtlist|compoundstmt declarations
+declarations>declaration|declarations declaration
+declaration>type identifier ;
+type>char|integer
+stmtlist>stmt|stmtlist stmt
+stmt>simplstmt ;|structstmt ;
+simplstmt>assignstmt|iostmt
+assignstmt>identifier = expression
+expression>term|expression + term|expression - term
+term>factor|term * factor|term / factor
+factor>( expression )|identifier|constant
+iostmt>READ ( identifier )|PRINT ( identifier )
+structstmt>ifstmt|whilestmt
+ifstmt>IF condition THEN stmt|IF condition THEN stmt ELSE stmt
+whilestmt>WHILE condition DO stmt
+condition>expression relation expression
+relation><|<=|==|<>|>=|>
+.
+S=program

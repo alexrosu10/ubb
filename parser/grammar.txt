@@ -1,0 +1,7 @@
+N=S,A
+sigma=a,b,c
+P:
+S>a A
+A>b A|c
+.
+S=S
