@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="SessionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Session)">
+        <MappingFragment StoreEntitySet="SessionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="ConferenceId" ColumnName="ConferenceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConferenceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Conference)">
+        <MappingFragment StoreEntitySet="ConferenceSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="AbstractDeadline" ColumnName="AbstractDeadline" />
+          <ScalarProperty Name="PaperDeadline" ColumnName="PaperDeadline" />
+          <ScalarProperty Name="BiddingDeadline" ColumnName="BiddingDeadline" />
+          <ScalarProperty Name="EvaluationDeadline" ColumnName="EvaluationDeadline" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListenerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Listener)">
+        <MappingFragment StoreEntitySet="ListenerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Author)">
+        <MappingFragment StoreEntitySet="AuthorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Affiliation" ColumnName="Affiliation" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Webpage" ColumnName="Webpage" />
+          <ScalarProperty Name="ListenerId" ColumnName="ListenerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Reviewer)">
+        <MappingFragment StoreEntitySet="ReviewerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConferenceChairSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ConferenceChair)">
+        <MappingFragment StoreEntitySet="ConferenceChairSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AbstractSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Abstract)">
+        <MappingFragment StoreEntitySet="AbstractSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+          <ScalarProperty Name="Topics" ColumnName="Topics" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaperSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Paper)">
+        <MappingFragment StoreEntitySet="PaperSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+          <ScalarProperty Name="AbstractId" ColumnName="AbstractId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewerAbstractSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ReviewerAbstract)">
+        <MappingFragment StoreEntitySet="ReviewerAbstractSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+          <ScalarProperty Name="AbstractId" ColumnName="AbstractId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewerPaperSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ReviewerPaper)">
+        <MappingFragment StoreEntitySet="ReviewerPaperSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Evaluation" ColumnName="Evaluation" />
+          <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+          <ScalarProperty Name="PaperId" ColumnName="PaperId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ListenerConference" TypeName="Model1.ListenerConference" StoreEntitySet="ListenerConference">
+      <EndProperty Name="Listener">
+        <ScalarProperty Name="Id" ColumnName="Listener_Id" />
+      </EndProperty>
+      <EndProperty Name="Conference">
+        <ScalarProperty Name="Id" ColumnName="Conference_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AuthorAbstract" TypeName="Model1.AuthorAbstract" StoreEntitySet="AuthorAbstract">
+      <EndProperty Name="Author">
+        <ScalarProperty Name="Id" ColumnName="Author_Id" />
+      </EndProperty>
+      <EndProperty Name="Abstract">
+        <ScalarProperty Name="Id" ColumnName="Abstract_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SessionReviewer" TypeName="Model1.SessionReviewer" StoreEntitySet="SessionReviewer">
+      <EndProperty Name="Session">
+        <ScalarProperty Name="Id" ColumnName="Session_Id" />
+      </EndProperty>
+      <EndProperty Name="Reviewer">
+        <ScalarProperty Name="Id" ColumnName="Reviewer_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SessionPaper" TypeName="Model1.SessionPaper" StoreEntitySet="SessionPaper">
+      <EndProperty Name="Session">
+        <ScalarProperty Name="Id" ColumnName="Session_Id" />
+      </EndProperty>
+      <EndProperty Name="Paper">
+        <ScalarProperty Name="Id" ColumnName="Paper_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConferenceConferenceChair" TypeName="Model1.ConferenceConferenceChair" StoreEntitySet="ConferenceConferenceChair">
+      <EndProperty Name="Conference">
+        <ScalarProperty Name="Id" ColumnName="Conference_Id" />
+      </EndProperty>
+      <EndProperty Name="ConferenceChair">
+        <ScalarProperty Name="Id" ColumnName="ConferenceChair_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

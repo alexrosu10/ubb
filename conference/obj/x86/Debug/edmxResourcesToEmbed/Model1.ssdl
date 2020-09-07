@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="SessionSet" EntityType="Model1.Store.SessionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConferenceSet" EntityType="Model1.Store.ConferenceSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ListenerSet" EntityType="Model1.Store.ListenerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AuthorSet" EntityType="Model1.Store.AuthorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReviewerSet" EntityType="Model1.Store.ReviewerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConferenceChairSet" EntityType="Model1.Store.ConferenceChairSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AbstractSet" EntityType="Model1.Store.AbstractSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PaperSet" EntityType="Model1.Store.PaperSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReviewerAbstractSet" EntityType="Model1.Store.ReviewerAbstractSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReviewerPaperSet" EntityType="Model1.Store.ReviewerPaperSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ListenerConference" EntityType="Model1.Store.ListenerConference" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AuthorAbstract" EntityType="Model1.Store.AuthorAbstract" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SessionReviewer" EntityType="Model1.Store.SessionReviewer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SessionPaper" EntityType="Model1.Store.SessionPaper" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConferenceConferenceChair" EntityType="Model1.Store.ConferenceConferenceChair" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ListenerConference_Listener" Association="Model1.Store.FK_ListenerConference_Listener">
+      <End Role="Listener" EntitySet="ListenerSet" />
+      <End Role="ListenerConference" EntitySet="ListenerConference" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListenerConference_Conference" Association="Model1.Store.FK_ListenerConference_Conference">
+      <End Role="Conference" EntitySet="ConferenceSet" />
+      <End Role="ListenerConference" EntitySet="ListenerConference" />
+    </AssociationSet>
+    <AssociationSet Name="ListenerAuthor" Association="Model1.Store.ListenerAuthor">
+      <End Role="Listener" EntitySet="ListenerSet" />
+      <End Role="Author" EntitySet="AuthorSet" />
+    </AssociationSet>
+    <AssociationSet Name="AuthorReviewer" Association="Model1.Store.AuthorReviewer">
+      <End Role="Author" EntitySet="AuthorSet" />
+      <End Role="Reviewer" EntitySet="ReviewerSet" />
+    </AssociationSet>
+    <AssociationSet Name="ReviewerConferenceChair" Association="Model1.Store.ReviewerConferenceChair">
+      <End Role="Reviewer" EntitySet="ReviewerSet" />
+      <End Role="ConferenceChair" EntitySet="ConferenceChairSet" />
+    </AssociationSet>
+    <AssociationSet Name="ReviewerReviewerPaper" Association="Model1.Store.ReviewerReviewerPaper">
+      <End Role="Reviewer" EntitySet="ReviewerSet" />
+      <End Role="ReviewerPaper" EntitySet="ReviewerPaperSet" />
+    </AssociationSet>
+    <AssociationSet Name="PaperReviewerPaper" Association="Model1.Store.PaperReviewerPaper">
+      <End Role="Paper" EntitySet="PaperSet" />
+      <End Role="ReviewerPaper" EntitySet="ReviewerPaperSet" />
+    </AssociationSet>
+    <AssociationSet Name="AbstractPaper" Association="Model1.Store.AbstractPaper">
+      <End Role="Abstract" EntitySet="AbstractSet" />
+      <End Role="Paper" EntitySet="PaperSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuthorAbstract_Author" Association="Model1.Store.FK_AuthorAbstract_Author">
+      <End Role="Author" EntitySet="AuthorSet" />
+      <End Role="AuthorAbstract" EntitySet="AuthorAbstract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuthorAbstract_Abstract" Association="Model1.Store.FK_AuthorAbstract_Abstract">
+      <End Role="Abstract" EntitySet="AbstractSet" />
+      <End Role="AuthorAbstract" EntitySet="AuthorAbstract" />
+    </AssociationSet>
+    <AssociationSet Name="ReviewerReviewerAbstract" Association="Model1.Store.ReviewerReviewerAbstract">
+      <End Role="Reviewer" EntitySet="ReviewerSet" />
+      <End Role="ReviewerAbstract" EntitySet="ReviewerAbstractSet" />
+    </AssociationSet>
+    <AssociationSet Name="AbstractReviewerAbstract" Association="Model1.Store.AbstractReviewerAbstract">
+      <End Role="Abstract" EntitySet="AbstractSet" />
+      <End Role="ReviewerAbstract" EntitySet="ReviewerAbstractSet" />
+    </AssociationSet>
+    <AssociationSet Name="ConferenceSession" Association="Model1.Store.ConferenceSession">
+      <End Role="Conference" EntitySet="ConferenceSet" />
+      <End Role="Session" EntitySet="SessionSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SessionReviewer_Session" Association="Model1.Store.FK_SessionReviewer_Session">
+      <End Role="Session" EntitySet="SessionSet" />
+      <End Role="SessionReviewer" EntitySet="SessionReviewer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SessionReviewer_Reviewer" Association="Model1.Store.FK_SessionReviewer_Reviewer">
+      <End Role="Reviewer" EntitySet="ReviewerSet" />
+      <End Role="SessionReviewer" EntitySet="SessionReviewer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SessionPaper_Session" Association="Model1.Store.FK_SessionPaper_Session">
+      <End Role="Session" EntitySet="SessionSet" />
+      <End Role="SessionPaper" EntitySet="SessionPaper" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SessionPaper_Paper" Association="Model1.Store.FK_SessionPaper_Paper">
+      <End Role="Paper" EntitySet="PaperSet" />
+      <End Role="SessionPaper" EntitySet="SessionPaper" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConferenceConferenceChair_Conference" Association="Model1.Store.FK_ConferenceConferenceChair_Conference">
+      <End Role="Conference" EntitySet="ConferenceSet" />
+      <End Role="ConferenceConferenceChair" EntitySet="ConferenceConferenceChair" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConferenceConferenceChair_ConferenceChair" Association="Model1.Store.FK_ConferenceConferenceChair_ConferenceChair">
+      <End Role="ConferenceChair" EntitySet="ConferenceChairSet" />
+      <End Role="ConferenceConferenceChair" EntitySet="ConferenceConferenceChair" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SessionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
+    <Property Name="Place" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ConferenceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConferenceSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="AbstractDeadline" Type="datetime" Nullable="false" />
+    <Property Name="PaperDeadline" Type="datetime" Nullable="false" />
+    <Property Name="BiddingDeadline" Type="datetime" Nullable="false" />
+    <Property Name="EvaluationDeadline" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListenerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuthorSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Affiliation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Webpage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ListenerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReviewerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuthorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConferenceChairSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReviewerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AbstractSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Keywords" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Topics" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaperSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsAccepted" Type="bit" Nullable="false" />
+    <Property Name="AbstractId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReviewerAbstractSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReviewerId" Type="int" Nullable="false" />
+    <Property Name="AbstractId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReviewerPaperSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Evaluation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Recommendations" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReviewerId" Type="int" Nullable="false" />
+    <Property Name="PaperId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListenerConference">
+    <Key>
+      <PropertyRef Name="Listener_Id" />
+      <PropertyRef Name="Conference_Id" />
+    </Key>
+    <Property Name="Listener_Id" Type="int" Nullable="false" />
+    <Property Name="Conference_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuthorAbstract">
+    <Key>
+      <PropertyRef Name="Author_Id" />
+      <PropertyRef Name="Abstract_Id" />
+    </Key>
+    <Property Name="Author_Id" Type="int" Nullable="false" />
+    <Property Name="Abstract_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SessionReviewer">
+    <Key>
+      <PropertyRef Name="Session_Id" />
+      <PropertyRef Name="Reviewer_Id" />
+    </Key>
+    <Property Name="Session_Id" Type="int" Nullable="false" />
+    <Property Name="Reviewer_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SessionPaper">
+    <Key>
+      <PropertyRef Name="Session_Id" />
+      <PropertyRef Name="Paper_Id" />
+    </Key>
+    <Property Name="Session_Id" Type="int" Nullable="false" />
+    <Property Name="Paper_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConferenceConferenceChair">
+    <Key>
+      <PropertyRef Name="Conference_Id" />
+      <PropertyRef Name="ConferenceChair_Id" />
+    </Key>
+    <Property Name="Conference_Id" Type="int" Nullable="false" />
+    <Property Name="ConferenceChair_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ListenerAuthor">
+    <End Role="Listener" Type="Model1.Store.ListenerSet" Multiplicity="1" />
+    <End Role="Author" Type="Model1.Store.AuthorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listener">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="ListenerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AuthorReviewer">
+    <End Role="Author" Type="Model1.Store.AuthorSet" Multiplicity="1" />
+    <End Role="Reviewer" Type="Model1.Store.ReviewerSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reviewer">
+        <PropertyRef Name="AuthorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReviewerConferenceChair">
+    <End Role="Reviewer" Type="Model1.Store.ReviewerSet" Multiplicity="1" />
+    <End Role="ConferenceChair" Type="Model1.Store.ConferenceChairSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConferenceChair">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReviewerReviewerPaper">
+    <End Role="Reviewer" Type="Model1.Store.ReviewerSet" Multiplicity="1" />
+    <End Role="ReviewerPaper" Type="Model1.Store.ReviewerPaperSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewerPaper">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PaperReviewerPaper">
+    <End Role="Paper" Type="Model1.Store.PaperSet" Multiplicity="1" />
+    <End Role="ReviewerPaper" Type="Model1.Store.ReviewerPaperSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paper">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewerPaper">
+        <PropertyRef Name="PaperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AbstractPaper">
+    <End Role="Abstract" Type="Model1.Store.AbstractSet" Multiplicity="1" />
+    <End Role="Paper" Type="Model1.Store.PaperSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Abstract">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Paper">
+        <PropertyRef Name="AbstractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReviewerReviewerAbstract">
+    <End Role="Reviewer" Type="Model1.Store.ReviewerSet" Multiplicity="1" />
+    <End Role="ReviewerAbstract" Type="Model1.Store.ReviewerAbstractSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewerAbstract">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AbstractReviewerAbstract">
+    <End Role="Abstract" Type="Model1.Store.AbstractSet" Multiplicity="1" />
+    <End Role="ReviewerAbstract" Type="Model1.Store.ReviewerAbstractSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Abstract">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewerAbstract">
+        <PropertyRef Name="AbstractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ConferenceSession">
+    <End Role="Conference" Type="Model1.Store.ConferenceSet" Multiplicity="1" />
+    <End Role="Session" Type="Model1.Store.SessionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conference">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="ConferenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListenerConference_Listener">
+    <End Role="Listener" Type="Model1.Store.ListenerSet" Multiplicity="1" />
+    <End Role="ListenerConference" Type="Model1.Store.ListenerConference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listener">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListenerConference">
+        <PropertyRef Name="Listener_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListenerConference_Conference">
+    <End Role="ListenerConference" Type="Model1.Store.ListenerConference" Multiplicity="*" />
+    <End Role="Conference" Type="Model1.Store.ConferenceSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Conference">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListenerConference">
+        <PropertyRef Name="Conference_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuthorAbstract_Author">
+    <End Role="Author" Type="Model1.Store.AuthorSet" Multiplicity="1" />
+    <End Role="AuthorAbstract" Type="Model1.Store.AuthorAbstract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AuthorAbstract">
+        <PropertyRef Name="Author_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuthorAbstract_Abstract">
+    <End Role="AuthorAbstract" Type="Model1.Store.AuthorAbstract" Multiplicity="*" />
+    <End Role="Abstract" Type="Model1.Store.AbstractSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Abstract">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AuthorAbstract">
+        <PropertyRef Name="Abstract_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SessionReviewer_Session">
+    <End Role="Session" Type="Model1.Store.SessionSet" Multiplicity="1" />
+    <End Role="SessionReviewer" Type="Model1.Store.SessionReviewer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SessionReviewer">
+        <PropertyRef Name="Session_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SessionReviewer_Reviewer">
+    <End Role="SessionReviewer" Type="Model1.Store.SessionReviewer" Multiplicity="*" />
+    <End Role="Reviewer" Type="Model1.Store.ReviewerSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SessionReviewer">
+        <PropertyRef Name="Reviewer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SessionPaper_Session">
+    <End Role="Session" Type="Model1.Store.SessionSet" Multiplicity="1" />
+    <End Role="SessionPaper" Type="Model1.Store.SessionPaper" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SessionPaper">
+        <PropertyRef Name="Session_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SessionPaper_Paper">
+    <End Role="SessionPaper" Type="Model1.Store.SessionPaper" Multiplicity="*" />
+    <End Role="Paper" Type="Model1.Store.PaperSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Paper">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SessionPaper">
+        <PropertyRef Name="Paper_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConferenceConferenceChair_Conference">
+    <End Role="Conference" Type="Model1.Store.ConferenceSet" Multiplicity="1" />
+    <End Role="ConferenceConferenceChair" Type="Model1.Store.ConferenceConferenceChair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conference">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConferenceConferenceChair">
+        <PropertyRef Name="Conference_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConferenceConferenceChair_ConferenceChair">
+    <End Role="ConferenceConferenceChair" Type="Model1.Store.ConferenceConferenceChair" Multiplicity="*" />
+    <End Role="ConferenceChair" Type="Model1.Store.ConferenceChairSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ConferenceChair">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConferenceConferenceChair">
+        <PropertyRef Name="ConferenceChair_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

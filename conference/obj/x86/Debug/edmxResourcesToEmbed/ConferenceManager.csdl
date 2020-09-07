@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ConferenceManager" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ConferenceManagerContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ConferenceSet" EntityType="ConferenceManager.Conference" />
+    <EntitySet Name="SessionSet" EntityType="ConferenceManager.Session" />
+    <AssociationSet Name="SessionConference" Association="ConferenceManager.SessionConference">
+      <End Role="Session" EntitySet="SessionSet" />
+      <End Role="Conference" EntitySet="ConferenceSet" />
+    </AssociationSet>
+    <EntitySet Name="ListenerSet" EntityType="ConferenceManager.Listener" />
+    <AssociationSet Name="ListenerConference" Association="ConferenceManager.ListenerConference">
+      <End Role="Listener" EntitySet="ListenerSet" />
+      <End Role="Conference" EntitySet="ConferenceSet" />
+    </AssociationSet>
+    <AssociationSet Name="AuthorSession" Association="ConferenceManager.AuthorSession">
+      <End Role="Author" EntitySet="ListenerSet" />
+      <End Role="Session" EntitySet="SessionSet" />
+    </AssociationSet>
+    <AssociationSet Name="SessionReviewer" Association="ConferenceManager.SessionReviewer">
+      <End Role="Session" EntitySet="SessionSet" />
+      <End Role="Reviewer" EntitySet="ListenerSet" />
+    </AssociationSet>
+    <AssociationSet Name="ConferenceChairConference" Association="ConferenceManager.ConferenceChairConference">
+      <End Role="ConferenceChair" EntitySet="ListenerSet" />
+      <End Role="Conference" EntitySet="ConferenceSet" />
+    </AssociationSet>
+    <EntitySet Name="AbstractSet" EntityType="ConferenceManager.Abstract" />
+    <AssociationSet Name="AbstractAuthor" Association="ConferenceManager.AbstractAuthor">
+      <End Role="Abstract" EntitySet="AbstractSet" />
+      <End Role="Author" EntitySet="ListenerSet" />
+    </AssociationSet>
+    <EntitySet Name="PaperSet" EntityType="ConferenceManager.Paper" />
+    <AssociationSet Name="PaperAbstract" Association="ConferenceManager.PaperAbstract">
+      <End Role="Paper" EntitySet="PaperSet" />
+      <End Role="Abstract" EntitySet="AbstractSet" />
+    </AssociationSet>
+    <EntitySet Name="PaperReviewSet" EntityType="ConferenceManager.PaperReview" />
+    <AssociationSet Name="ReviewerPaperReview" Association="ConferenceManager.ReviewerPaperReview">
+      <End Role="PaperReview" EntitySet="PaperReviewSet" />
+      <End Role="Reviewer" EntitySet="ListenerSet" />
+    </AssociationSet>
+    <AssociationSet Name="PaperPaperReview" Association="ConferenceManager.PaperPaperReview">
+      <End Role="Paper" EntitySet="PaperSet" />
+      <End Role="PaperReview" EntitySet="PaperReviewSet" />
+    </AssociationSet>
+    <EntitySet Name="AbstractBiddingSet" EntityType="ConferenceManager.AbstractBidding" />
+    <AssociationSet Name="AbstractBiddingReviewer" Association="ConferenceManager.AbstractBiddingReviewer">
+      <End Role="AbstractBidding" EntitySet="AbstractBiddingSet" />
+      <End Role="Reviewer" EntitySet="ListenerSet" />
+    </AssociationSet>
+    <AssociationSet Name="AbstractBiddingAbstract" Association="ConferenceManager.AbstractBiddingAbstract">
+      <End Role="AbstractBidding" EntitySet="AbstractBiddingSet" />
+      <End Role="Abstract" EntitySet="AbstractSet" />
+    </AssociationSet>
+    <AssociationSet Name="PaperSession" Association="ConferenceManager.PaperSession">
+      <End Role="Paper" EntitySet="PaperSet" />
+      <End Role="Session" EntitySet="SessionSet" />
+    </AssociationSet>
+    <AssociationSet Name="ConferenceReviewer" Association="ConferenceManager.ConferenceReviewer">
+      <End Role="Conference" EntitySet="ConferenceSet" />
+      <End Role="Reviewer" EntitySet="ListenerSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Conference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" />
+    <Property Name="AbstractDeadline" Type="DateTime" Nullable="false" />
+    <Property Name="PaperDeadline" Type="DateTime" Nullable="false" />
+    <Property Name="BiddingDeadline" Type="DateTime" Nullable="false" />
+    <Property Name="EvaluationDeadline" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Sessions" Relationship="ConferenceManager.SessionConference" FromRole="Conference" ToRole="Session" />
+    <NavigationProperty Name="Listeners" Relationship="ConferenceManager.ListenerConference" FromRole="Conference" ToRole="Listener" />
+    <NavigationProperty Name="ConferenceChair" Relationship="ConferenceManager.ConferenceChairConference" FromRole="Conference" ToRole="ConferenceChair" />
+    <Property Name="ConferenceChairId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Reviewers" Relationship="ConferenceManager.ConferenceReviewer" FromRole="Conference" ToRole="Reviewer" />
+  </EntityType>
+  <EntityType Name="Session">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Time" Type="DateTime" Nullable="false" />
+    <Property Name="Place" Type="String" Nullable="false" />
+    <NavigationProperty Name="Conference" Relationship="ConferenceManager.SessionConference" FromRole="Session" ToRole="Conference" />
+    <Property Name="ConferenceId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Speakers" Relationship="ConferenceManager.AuthorSession" FromRole="Session" ToRole="Author" />
+    <NavigationProperty Name="SessionChair" Relationship="ConferenceManager.SessionReviewer" FromRole="Session" ToRole="Reviewer" />
+    <Property Name="SessionChairId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Papers" Relationship="ConferenceManager.PaperSession" FromRole="Session" ToRole="Paper" />
+  </EntityType>
+  <Association Name="SessionConference">
+    <End Type="ConferenceManager.Session" Role="Session" Multiplicity="*" />
+    <End Type="ConferenceManager.Conference" Role="Conference" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Conference">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="ConferenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Listener">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <NavigationProperty Name="Conference" Relationship="ConferenceManager.ListenerConference" FromRole="Listener" ToRole="Conference" />
+  </EntityType>
+  <Association Name="ListenerConference">
+    <End Type="ConferenceManager.Listener" Role="Listener" Multiplicity="*" />
+    <End Type="ConferenceManager.Conference" Role="Conference" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Author" BaseType="ConferenceManager.Listener">
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Affiliation" Type="String" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <NavigationProperty Name="SpeakerAtSession" Relationship="ConferenceManager.AuthorSession" FromRole="Author" ToRole="Session" />
+    <NavigationProperty Name="Abstracts" Relationship="ConferenceManager.AbstractAuthor" FromRole="Author" ToRole="Abstract" />
+  </EntityType>
+  <Association Name="AuthorSession">
+    <End Type="ConferenceManager.Author" Role="Author" Multiplicity="*" />
+    <End Type="ConferenceManager.Session" Role="Session" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Reviewer" BaseType="ConferenceManager.Author">
+    <Property Name="Webpage" Type="String" Nullable="false" />
+    <NavigationProperty Name="ChairAtSession" Relationship="ConferenceManager.SessionReviewer" FromRole="Reviewer" ToRole="Session" />
+    <NavigationProperty Name="PaperReview" Relationship="ConferenceManager.ReviewerPaperReview" FromRole="Reviewer" ToRole="PaperReview" />
+    <NavigationProperty Name="AbstractBidding" Relationship="ConferenceManager.AbstractBiddingReviewer" FromRole="Reviewer" ToRole="AbstractBidding" />
+    <NavigationProperty Name="ReviewerAtConference" Relationship="ConferenceManager.ConferenceReviewer" FromRole="Reviewer" ToRole="Conference" />
+  </EntityType>
+  <Association Name="SessionReviewer">
+    <End Type="ConferenceManager.Session" Role="Session" Multiplicity="*" />
+    <End Type="ConferenceManager.Reviewer" Role="Reviewer" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="SessionChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ConferenceChair" BaseType="ConferenceManager.Reviewer">
+    <NavigationProperty Name="ChairAtConference" Relationship="ConferenceManager.ConferenceChairConference" FromRole="ConferenceChair" ToRole="Conference" />
+  </EntityType>
+  <Association Name="ConferenceChairConference">
+    <End Type="ConferenceManager.ConferenceChair" Role="ConferenceChair" Multiplicity="1" />
+    <End Type="ConferenceManager.Conference" Role="Conference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConferenceChair">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Conference">
+        <PropertyRef Name="ConferenceChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Abstract">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Keywords" Type="String" Nullable="false" />
+    <Property Name="Topics" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="Authors" Relationship="ConferenceManager.AbstractAuthor" FromRole="Abstract" ToRole="Author" />
+    <NavigationProperty Name="Paper" Relationship="ConferenceManager.PaperAbstract" FromRole="Abstract" ToRole="Paper" />
+    <NavigationProperty Name="AbstractBidding" Relationship="ConferenceManager.AbstractBiddingAbstract" FromRole="Abstract" ToRole="AbstractBidding" />
+  </EntityType>
+  <Association Name="AbstractAuthor">
+    <End Type="ConferenceManager.Abstract" Role="Abstract" Multiplicity="*" />
+    <End Type="ConferenceManager.Author" Role="Author" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Paper">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Content" Type="String" Nullable="false" />
+    <Property Name="IsAccepted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Abstract" Relationship="ConferenceManager.PaperAbstract" FromRole="Paper" ToRole="Abstract" />
+    <NavigationProperty Name="PaperReview" Relationship="ConferenceManager.PaperPaperReview" FromRole="Paper" ToRole="PaperReview" />
+    <NavigationProperty Name="Session" Relationship="ConferenceManager.PaperSession" FromRole="Paper" ToRole="Session" />
+    <Property Name="SessionId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="PaperAbstract">
+    <End Type="ConferenceManager.Paper" Role="Paper" Multiplicity="0..1" />
+    <End Type="ConferenceManager.Abstract" Role="Abstract" Multiplicity="1" />
+  </Association>
+  <EntityType Name="PaperReview">
+    <Key>
+      <PropertyRef Name="ReviewerId" />
+      <PropertyRef Name="PaperId" />
+    </Key>
+    <NavigationProperty Name="Reviewer" Relationship="ConferenceManager.ReviewerPaperReview" FromRole="PaperReview" ToRole="Reviewer" />
+    <Property Name="ReviewerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Paper" Relationship="ConferenceManager.PaperPaperReview" FromRole="PaperReview" ToRole="Paper" />
+    <Property Name="PaperId" Type="Int32" Nullable="false" />
+    <Property Name="Evaluation" Type="String" Nullable="false" />
+    <Property Name="Recommendations" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="ReviewerPaperReview">
+    <End Type="ConferenceManager.PaperReview" Role="PaperReview" Multiplicity="*" />
+    <End Type="ConferenceManager.Reviewer" Role="Reviewer" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaperReview">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PaperPaperReview">
+    <End Type="ConferenceManager.Paper" Role="Paper" Multiplicity="1" />
+    <End Type="ConferenceManager.PaperReview" Role="PaperReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paper">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaperReview">
+        <PropertyRef Name="PaperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AbstractBidding">
+    <Key>
+      <PropertyRef Name="ReviewerId" />
+      <PropertyRef Name="AbstractId" />
+    </Key>
+    <NavigationProperty Name="Reviewer" Relationship="ConferenceManager.AbstractBiddingReviewer" FromRole="AbstractBidding" ToRole="Reviewer" />
+    <Property Name="ReviewerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Abstract" Relationship="ConferenceManager.AbstractBiddingAbstract" FromRole="AbstractBidding" ToRole="Abstract" />
+    <Property Name="AbstractId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="AbstractBiddingReviewer">
+    <End Type="ConferenceManager.AbstractBidding" Role="AbstractBidding" Multiplicity="*" />
+    <End Type="ConferenceManager.Reviewer" Role="Reviewer" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Reviewer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AbstractBidding">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AbstractBiddingAbstract">
+    <End Type="ConferenceManager.AbstractBidding" Role="AbstractBidding" Multiplicity="*" />
+    <End Type="ConferenceManager.Abstract" Role="Abstract" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Abstract">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AbstractBidding">
+        <PropertyRef Name="AbstractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PaperSession">
+    <End Type="ConferenceManager.Paper" Role="Paper" Multiplicity="*" />
+    <End Type="ConferenceManager.Session" Role="Session" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Paper">
+        <PropertyRef Name="SessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ConferenceReviewer">
+    <End Type="ConferenceManager.Conference" Role="Conference" Multiplicity="*" />
+    <End Type="ConferenceManager.Reviewer" Role="Reviewer" Multiplicity="*" />
+  </Association>
+</Schema>

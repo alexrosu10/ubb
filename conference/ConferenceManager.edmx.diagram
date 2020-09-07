@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a04dc414c4f040b6a92ebf0124650b07" Name="Diagram1" >
+        <EntityTypeShape EntityType="ConferenceManager.Conference" Width="1.5" PointX="7.125" PointY="1.75" />
+        <EntityTypeShape EntityType="ConferenceManager.Session" Width="1.5" PointX="9.375" PointY="2" />
+        <AssociationConnector Association="ConferenceManager.SessionConference" />
+        <EntityTypeShape EntityType="ConferenceManager.Listener" Width="1.5" PointX="4.5" PointY="2.25" />
+        <AssociationConnector Association="ConferenceManager.ListenerConference" />
+        <EntityTypeShape EntityType="ConferenceManager.Author" Width="1.5" PointX="4.375" PointY="4.875" />
+        <InheritanceConnector EntityType="ConferenceManager.Author" />
+        <AssociationConnector Association="ConferenceManager.AuthorSession" />
+        <EntityTypeShape EntityType="ConferenceManager.Reviewer" Width="1.5" PointX="4.375" PointY="7.875" />
+        <InheritanceConnector EntityType="ConferenceManager.Reviewer" />
+        <AssociationConnector Association="ConferenceManager.SessionReviewer" />
+        <EntityTypeShape EntityType="ConferenceManager.ConferenceChair" Width="1.5" PointX="5.25" PointY="10.375" />
+        <InheritanceConnector EntityType="ConferenceManager.ConferenceChair" />
+        <AssociationConnector Association="ConferenceManager.ConferenceChairConference" />
+        <EntityTypeShape EntityType="ConferenceManager.Abstract" Width="1.5" PointX="0.5" PointY="2.125" />
+        <AssociationConnector Association="ConferenceManager.AbstractAuthor" />
+        <EntityTypeShape EntityType="ConferenceManager.Paper" Width="1.5" PointX="0.5" PointY="5.5" />
+        <AssociationConnector Association="ConferenceManager.PaperAbstract" />
+        <EntityTypeShape EntityType="ConferenceManager.PaperReview" Width="1.5" PointX="2.75" PointY="5.25" />
+        <AssociationConnector Association="ConferenceManager.ReviewerPaperReview" />
+        <AssociationConnector Association="ConferenceManager.PaperPaperReview" />
+        <EntityTypeShape EntityType="ConferenceManager.AbstractBidding" Width="1.5" PointX="2.5" PointY="2.875" />
+        <AssociationConnector Association="ConferenceManager.AbstractBiddingReviewer" />
+        <AssociationConnector Association="ConferenceManager.AbstractBiddingAbstract" />
+        <AssociationConnector Association="ConferenceManager.PaperSession" />
+        <AssociationConnector Association="ConferenceManager.ConferenceReviewer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
